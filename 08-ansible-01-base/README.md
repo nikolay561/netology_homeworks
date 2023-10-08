@@ -215,10 +215,6 @@ ubuntu                     : ok=3    changed=0    unreachable=0    failed=0    s
 9. Посмотрите при помощи `ansible-doc` список плагинов для подключения. Выберите подходящий для работы на `control node`.\
 Ответ:
 ```
-root@my-server:/home/solovtsov/homework/netology_homeworks/08-ansible-01-base/playbook# ansible-doc -t shell -l
-cmd        Windows Command Prompt
-powershell Windows PowerShell
-sh         POSIX shell (/bin/sh)
 root@my-server:/home/solovtsov/homework/netology_homeworks/08-ansible-01-base/playbook# ansible-doc -t connection -l
 community.docker.docker     Run tasks in docker containers
 community.docker.docker_api Run tasks in docker containers
