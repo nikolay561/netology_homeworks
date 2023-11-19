@@ -37,9 +37,8 @@
 2. Если всё отработалось в рамках ожидания — выгрузите схемы workflow для импорта в XML. Файлы с workflow и скриншоты workflow приложите к решению задания.
 
 ![](./bug.png)
-![](./other.png)
-
 [workflow for bug](./workflow_for_bug.xml)
+![](./other.png)
 [workflow for other](./workflow_for_other.xml)
 
 ---
