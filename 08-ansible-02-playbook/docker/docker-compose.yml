@@ -1,0 +1,34 @@
+version: '3.8'
+
+services:
+
+  clickhouse:
+    image: centos:7
+    container_name: clickhouse-01
+    privileged: true
+    entrypoint: ["/usr/sbin/init"]
+    build:
+      context: ./
+      dockerfile: centos_7.Dockerfile
+    networks:
+      service_net:
+        ipv4_address: 192.168.10.3
+
+  vector:
+    image: centos:7
+    container_name: vector-01
+    privileged: true
+    entrypoint: ["/usr/sbin/init"]
+    build:
+      context: ./
+      dockerfile: centos_7.Dockerfile
+    networks:
+      service_net:
+        ipv4_address: 192.168.10.2
+
+networks:
+  service_net:
+    ipam:
+      driver: default
+      config:
+        - subnet: 192.168.10.0/24
