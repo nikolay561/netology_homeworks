@@ -9,22 +9,22 @@
 
 ## Основная часть
 
-1. Подготовьте свой inventory-файл `prod.yml`.
+1. Подготовьте свой inventory-файл `prod.yml`.\n
 Ответ:
 ```
 root@my-server:/home/solovtsov/homework/netology_homeworks/08-ansible-02-playbook/playbook# cat inventory/prod.yml
 ---
 clickhouse:
   hosts:
-    clickhouse:
+    clickhouse-01:
       ansible_connection: docker
 
 vector:
   hosts:
-    vector:
+    vector-01:
       ansible_connection: docker
 ```
-2. Допишите playbook: нужно сделать ещё один play, который устанавливает и настраивает [vector](https://vector.dev). Конфигурация vector должна деплоиться через template файл jinja2. От вас не требуется использовать все возможности шаблонизатора, просто вставьте стандартный конфиг в template файл. Информация по шаблонам по [ссылке](https://www.dmosk.ru/instruktions.php?object=ansible-nginx-install).\
+2. Допишите playbook: нужно сделать ещё один play, который устанавливает и настраивает [vector](https://vector.dev). Конфигурация vector должна деплоиться через template файл jinja2. От вас не требуется использовать все возможности шаблонизатора, просто вставьте стандартный конфиг в template файл. Информация по шаблонам по [ссылке](https://www.dmosk.ru/instruktions.php?object=ansible-nginx-install).\n
 Ответ:
 ```
 - name: Install Vector
@@ -58,14 +58,13 @@ vector_version: "0.33.0"
 3. При создании tasks рекомендую использовать модули: `get_url`, `template`, `unarchive`, `file`.
 Ответ: Использован модуль ansible.builtin.get_url для загрузки необходимого дистрибутива.
 
-4. Tasks должны: скачать дистрибутив нужной версии, выполнить распаковку в выбранную директорию, установить vector.
-Ответ:
-Скачивается дистрибутив vector версии 0.33.0, распаковка не требуется, пакет устанавливается через менеджер пакетов yum, используется модуль ansible.builtin.yum.
+4. Tasks должны: скачать дистрибутив нужной версии, выполнить распаковку в выбранную директорию, установить vector.\n
+Ответ: Скачивается дистрибутив vector версии 0.33.0, распаковка не требуется, пакет устанавливается через менеджер пакетов yum, используется модуль ansible.builtin.yum.
 
-5. Запустите `ansible-lint site.yml` и исправьте ошибки, если они есть.
+5. Запустите `ansible-lint site.yml` и исправьте ошибки, если они есть.\n
 Ответ: ansible-lint site.yml ошибок не показывает.
 
-6. Попробуйте запустить playbook на этом окружении с флагом `--check`.
+6. Попробуйте запустить playbook на этом окружении с флагом `--check`.\n
 Ответ:
 ```
 root@my-server:/home/solovtsov/homework/netology_homeworks/08-ansible-02-playbook/playbook# ansible-playbook -i inventory/prod.yml site.yml --check
@@ -94,7 +93,7 @@ root@my-server:/home/solovtsov/homework/netology_homeworks/08-ansible-02-playboo
 
 Команда ansible-playbook -i inventory/prod.yml site.yml --check показывает ошибку, так как не может найти дистрибутив, который скачивается по url. Не нашел как это побороть, работе плейбука это не мешает.
 
-7. Запустите playbook на `prod.yml` окружении с флагом `--diff`. Убедитесь, что изменения на системе произведены.
+7. Запустите playbook на `prod.yml` окружении с флагом `--diff`. Убедитесь, что изменения на системе произведены.\n
 Ответ:
 ```
 root@my-server:/home/solovtsov/homework/netology_homeworks/08-ansible-02-playbook/playbook# ansible-playbook -i inventory/prod.yml site.yml --diff
@@ -141,7 +140,7 @@ vector-01                  : ok=3    changed=2    unreachable=0    failed=0    s
 root@my-server:/home/solovtsov/homework/netology_homeworks/08-ansible-02-playbook/playbook#
 ```
 
-8. Повторно запустите playbook с флагом `--diff` и убедитесь, что playbook идемпотентен.
+8. Повторно запустите playbook с флагом `--diff` и убедитесь, что playbook идемпотентен.\n
 Ответ:
 ```
 root@my-server:/home/solovtsov/homework/netology_homeworks/08-ansible-02-playbook/playbook# ansible-playbook -i inventory/prod.yml site.yml --diff
@@ -185,8 +184,8 @@ vector-01                  : ok=3    changed=0    unreachable=0    failed=0    s
 root@my-server:/home/solovtsov/homework/netology_homeworks/08-ansible-02-playbook/playbook#
 ```
 
-9. Подготовьте README.md-файл по своему playbook. В нём должно быть описано: что делает playbook, какие у него есть параметры и теги. Пример качественной документации ansible playbook по [ссылке](https://github.com/opensearch-project/ansible-playbook).
-Ответ:
+9. Подготовьте README.md-файл по своему playbook. В нём должно быть описано: что делает playbook, какие у него есть параметры и теги. Пример качественной документации ansible playbook по [ссылке](https://github.com/opensearch-project/ansible-playbook).\n
+Ответ:\n
 
 Устанавливается Clickhouse, после установки сервис перезагружается.
 ```
