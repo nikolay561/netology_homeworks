@@ -46,6 +46,14 @@ vector:
       ansible.builtin.yum:
         disable_gpg_check: true
         name: ./vector_{{ vector_version }}.rpm
+    - name: Configure Vector
+      become: true
+      ansible.builtin.template:
+        src: vector.j2
+        mode: 0644
+        dest: etc/vector/vector.yaml
+      notify: Start vector service
+
 ```
 Переменная vector_version хранится в playbook/group_vars/vector/vars.yml:
 ```
@@ -228,7 +236,7 @@ root@my-server:/home/solovtsov/homework/netology_homeworks/08-ansible-02-playboo
       failed_when: create_db.rc != 0 and create_db.rc !=82
       changed_when: create_db.rc == 0
 ```
-Устанавливается Vector, после установки сервис перезагружается.
+Устанавливается Vector.
 ```
 - name: Install Vector
   hosts: vector
@@ -239,7 +247,7 @@ root@my-server:/home/solovtsov/homework/netology_homeworks/08-ansible-02-playboo
         name: vector
         state: restarted
 ```
-Пакет для установки Clickhouse скачивается с https://packages.clickhouse.com/.
+Пакет для установки Clickhouse скачивается с https://packages.clickhouse.com/, подготавливается конфиг файл, происходит перезагрузка сервиса vector.
 ```
   tasks:
     - name: Get vector distrib
@@ -252,6 +260,14 @@ root@my-server:/home/solovtsov/homework/netology_homeworks/08-ansible-02-playboo
       ansible.builtin.yum:
         disable_gpg_check: true
         name: ./vector_{{ vector_version }}.rpm
+    - name: Configure Vector
+      become: true
+      ansible.builtin.template:
+        src: vector.j2
+        mode: 0644
+        dest: etc/vector/vector.yaml
+      notify: Start vector service
+
 ```
 
 10. Готовый playbook выложите в свой репозиторий, поставьте тег `08-ansible-02-playbook` на фиксирующий коммит, в ответ предоставьте ссылку на него.
