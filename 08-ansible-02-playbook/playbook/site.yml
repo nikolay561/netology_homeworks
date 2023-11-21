@@ -54,3 +54,10 @@
       ansible.builtin.yum:
         disable_gpg_check: true
         name: ./vector_{{ vector_version }}.rpm
+    - name: Configure Vector
+      become: true
+      ansible.builtin.template:
+        src: vector.j2
+        mode: 0644
+        dest: etc/vector/vector.yaml
+      notify: Start vector service

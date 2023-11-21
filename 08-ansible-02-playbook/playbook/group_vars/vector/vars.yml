@@ -1,2 +1,20 @@
 ---
 vector_version: "0.33.0"
+vector_config:
+  sources:
+    log_file:
+      type: file
+      include:
+        - etc/vector/*.log"
+      read_from: beginning
+  sinks:
+      clickhouse:
+        type: clickhouse
+        inputs: 
+          - log_file
+        table: my_table
+        compression: gzip
+        database: logs
+        endpoint: http://192.168.10.3:8123
+        skip_unknown_fields: true
+        healthcheck: false
