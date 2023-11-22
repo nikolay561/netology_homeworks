@@ -1,0 +1,18 @@
+---
+clickhouse:
+  hosts:
+    clickhouse-01:
+      ansible_host: 51.250.30.255
+      ansible_user: solovtsov
+
+vector:
+  hosts:
+    vector-01:
+      ansible_host: 51.250.18.126
+      ansible_user: solovtsov
+
+lighthouse:
+  hosts:
+    lighthouse-01:
+      ansible_host: 84.252.136.88
+      ansible_user: solovtsov
