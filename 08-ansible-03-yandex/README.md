@@ -94,7 +94,8 @@ lighthouse:
       ansible_user: solovtsov
 ```
 5. Запустите `ansible-lint site.yml` и исправьте ошибки, если они есть.  
-Ответ: `ansible-lint site.yml` ошибок не показывет.  
+Ответ: Установил свежий Debian, python и ansible с ansible-lint, исправил ошибки, сейчас `ansible-lint site.yml` ошибок не показывет.  
+![](linter.png)
 6. Попробуйте запустить playbook на этом окружении с флагом `--check`.
 ```
 root@my-server:/home/solovtsov/homework/netology_homeworks/08-ansible-03-yandex/playbook# ansible-playbook -i inventory/prod.yml site.yml --check
